@@ -1,6 +1,6 @@
 ﻿namespace GDVCore.Drivetrain
 {
-  public class DrivetrainComponent
+  public abstract class DrivetrainComponent
   {
     //-------------------------------------------------------------------------
 
@@ -12,6 +12,10 @@
     {
       Name = name;
     }
+
+    //-------------------------------------------------------------------------
+
+    public abstract double Process( double inputTorque );
 
     //-------------------------------------------------------------------------
   }
