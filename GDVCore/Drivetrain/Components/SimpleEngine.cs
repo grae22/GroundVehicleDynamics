@@ -1,4 +1,4 @@
-﻿namespace GDVCore.Drivetrain
+﻿namespace GDVCore.Drivetrain.Components
 {
   class SimpleEngine : DrivetrainComponent
   {
