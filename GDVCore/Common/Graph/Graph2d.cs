@@ -26,6 +26,66 @@ namespace GDVCore.Common.Graph
 
     //-------------------------------------------------------------------------
 
+    public double MinX
+    {
+      get
+      {
+        if( Points.Length == 0 )
+        {
+          return 0.0;
+        }
+
+        return Points[ 0 ].x;
+      }
+    }
+
+    //-------------------------------------------------------------------------
+
+    public double MaxX
+    {
+      get
+      {
+        if( Points.Length == 0 )
+        {
+          return 0.0;
+        }
+
+        return Points[ Points.Length - 1 ].x;
+      }
+    }
+
+    //-------------------------------------------------------------------------
+
+    public double MinY
+    {
+      get
+      {
+        if( Points.Length == 0 )
+        {
+          return 0.0;
+        }
+
+        return Points[ 0 ].y;
+      }
+    }
+
+    //-------------------------------------------------------------------------
+
+    public double MaxY
+    {
+      get
+      {
+        if( Points.Length == 0 )
+        {
+          return 0.0;
+        }
+
+        return Points[ Points.Length - 1 ].y;
+      }
+    }
+
+    //-------------------------------------------------------------------------
+
     public void AddPoint(
       double x,
       double y )
@@ -72,6 +132,18 @@ namespace GDVCore.Common.Graph
       // Update the point.
       Points[ index ].x = x;
       Points[ index ].y = y;
+    }
+
+    //-------------------------------------------------------------------------
+
+    public void SetPoints( Point[] points )
+    {
+      Points = new Point[ points.Length ];
+
+      for( int i = 0; i < points.Length; i++ )
+      {
+        Points[ i ] = points[ i ];
+      }
     }
 
     //-------------------------------------------------------------------------

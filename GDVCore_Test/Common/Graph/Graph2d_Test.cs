@@ -66,6 +66,20 @@ namespace GDVCore_Test.Common.Graph
       Assert.AreEqual( 40.0, TestOb.GetPoint( 1 ).y );
 
       Assert.AreEqual( 2, TestOb.GetPointCount() );
+
+      // Now set the points from an array.
+      Graph2d.Point[] points =
+      {
+        new Graph2d.Point( 100.0, 101.0 ),
+        new Graph2d.Point( 200.0, 202.0 )
+      };
+
+      TestOb.SetPoints( points );
+
+      Assert.AreEqual( 100.0, TestOb.GetPoint( 0 ).x );
+      Assert.AreEqual( 101.0, TestOb.GetPoint( 0 ).y );
+      Assert.AreEqual( 200.0, TestOb.GetPoint( 1 ).x );
+      Assert.AreEqual( 202.0, TestOb.GetPoint( 1 ).y );
     }
 
     //-------------------------------------------------------------------------
@@ -198,6 +212,22 @@ namespace GDVCore_Test.Common.Graph
       }
 
       Assert.IsFalse( caughtException );
+    }
+
+    //-------------------------------------------------------------------------
+
+    [TestMethod]
+    public void MinAndMaxBounds()
+    {
+      // Add some points.
+      TestOb.AddPoint( 1.0, 2.0 );
+      TestOb.AddPoint( 3.0, 4.0 );
+
+      // Test.
+      Assert.AreEqual( 1.0, TestOb.MinX );
+      Assert.AreEqual( 2.0, TestOb.MinY );
+      Assert.AreEqual( 3.0, TestOb.MaxX );
+      Assert.AreEqual( 4.0, TestOb.MaxY );
     }
 
     //-------------------------------------------------------------------------
