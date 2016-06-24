@@ -1,6 +1,6 @@
 ﻿using GDVCore.Common.Rotator;
 
-namespace GDVCore.Drivetrain.Components
+namespace GDVCore.Drivetrain.Component
 {
   class SimpleEngine : DrivetrainComponent
   {

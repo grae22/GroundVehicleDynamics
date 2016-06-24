@@ -37,12 +37,14 @@
     <!-- A reference to the entire .NET Framework is automatically included -->
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\Graph\Graph2d.cs" />
+    <Compile Include="Common\Graph\LinearGraph2d.cs" />
     <Compile Include="Common\Rotator\FrictionlessRotator.cs" />
     <Compile Include="Common\Rotator\Rotator.cs" />
     <Compile Include="Drivetrain\DrivetrainComponent.cs" />
     <Compile Include="Drivetrain\DrivetrainComponentFactory.cs" />
     <Compile Include="Drivetrain\DrivetrainInputProvider.cs" />
-    <Compile Include="Drivetrain\Components\SimpleEngine.cs" />
+    <Compile Include="Drivetrain\Component\SimpleEngine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
