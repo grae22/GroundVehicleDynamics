@@ -13,8 +13,9 @@ namespace GDVCore.Drivetrain.Component
     // Graph used to look up torque values.
     public Graph2d TorqueCurve { get; set; }
 
-    // Rotator object used to model the flywheel.
-    public Rotator Flywheel { get; set; }
+    // Rotator object used to model the crankshaft, when assigning a mass
+    // one should probably include the mass of the flywheel.
+    public Rotator Crankshaft { get; set; }
 
     //-------------------------------------------------------------------------
 
@@ -22,27 +23,39 @@ namespace GDVCore.Drivetrain.Component
       string name,
       Graph2d powerCurve = null,
       Graph2d torqueCurve = null,
-      Rotator flywheel = null )
+      Rotator crankshaft = null )
     :
       base( name )
     {
       PowerCurve = ( powerCurve == null ? new LinearGraph2d() : powerCurve );
       TorqueCurve = ( torqueCurve == null ? new LinearGraph2d() : torqueCurve );
-      Flywheel = ( flywheel == null ? new FrictionlessRotator() : flywheel );
+      Crankshaft = ( crankshaft == null ? new FrictionlessRotator() : crankshaft );
     }
 
     //-------------------------------------------------------------------------
+
+    // 'inputTorque' : Starter motor?
 
     public override double ProcessTorqueAndReturnSpeed(
       double deltaTime,
       double inputTorque,
       DrivetrainInputProvider inputProvider )
     {
-      //Flywheel.ApplyTorque(
+      // Figure out using our current engine speed what the max power we
+      // can generate is.
+      double maxPower = PowerCurve.GetValueAtX( Crankshaft.GetRpm() );
+      
+      // Calculate the actual power by factoring in the accelerator.
+      double power = ( maxPower * inputProvider.GetAcceleratorInput() );
 
-      Flywheel.Update( deltaTime );
+      // Calculate torque and add it to the input torque.
+      inputTorque += power / Crankshaft.GetRps();
 
-      return Flywheel.GetRps();
+      // Apply torque to the crankshaft and allow it to update.
+      Crankshaft.ApplyTorque( inputTorque );
+      Crankshaft.Update( deltaTime );
+
+      return Crankshaft.GetRps();
     }
 
     //-------------------------------------------------------------------------
