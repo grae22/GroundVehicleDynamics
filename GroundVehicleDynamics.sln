@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GDVCore", "GDVCore\GDVCore.csproj", "{1011DFA3-F632-408F-8172-B411D80A0BF7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GVDCore", "GVDCore\GVDCore.csproj", "{1011DFA3-F632-408F-8172-B411D80A0BF7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GDVCore_Test", "GDVCore_Test\GDVCore_Test.csproj", "{4BE7494B-2AB8-45E1-9DD5-CE9B7E3B058D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GVDCore_Test", "GVDCore_Test\GVDCore_Test.csproj", "{4BE7494B-2AB8-45E1-9DD5-CE9B7E3B058D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
