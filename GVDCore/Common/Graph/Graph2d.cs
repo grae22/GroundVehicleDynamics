@@ -2,7 +2,7 @@
 
 namespace GVDCore.Common.Graph
 {
-  abstract class Graph2d
+  public abstract class Graph2d
   {
     //-------------------------------------------------------------------------
 

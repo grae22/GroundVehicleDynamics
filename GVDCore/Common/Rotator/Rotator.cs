@@ -1,6 +1,6 @@
 ﻿namespace GVDCore.Common.Rotator
 {
-  abstract class Rotator
+  public abstract class Rotator
   {
     //-------------------------------------------------------------------------
 

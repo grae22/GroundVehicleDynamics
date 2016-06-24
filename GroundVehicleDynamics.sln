@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GVDCore", "GVDCore\GVDCore.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GVDCore_Test", "GVDCore_Test\GVDCore_Test.csproj", "{4BE7494B-2AB8-45E1-9DD5-CE9B7E3B058D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GVDTestApp", "GVDTestApp\GVDTestApp.csproj", "{91514AB1-0021-4267-807F-42F8B837A200}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{4BE7494B-2AB8-45E1-9DD5-CE9B7E3B058D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4BE7494B-2AB8-45E1-9DD5-CE9B7E3B058D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4BE7494B-2AB8-45E1-9DD5-CE9B7E3B058D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91514AB1-0021-4267-807F-42F8B837A200}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91514AB1-0021-4267-807F-42F8B837A200}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91514AB1-0021-4267-807F-42F8B837A200}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91514AB1-0021-4267-807F-42F8B837A200}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

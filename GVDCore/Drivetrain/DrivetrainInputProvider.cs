@@ -1,6 +1,6 @@
 ﻿namespace GVDCore.Drivetrain
 {
-  abstract class DrivetrainInputProvider
+  public abstract class DrivetrainInputProvider
   {
     //-------------------------------------------------------------------------
 

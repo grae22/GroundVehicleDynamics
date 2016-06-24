@@ -3,7 +3,7 @@ using GVDCore.Common.Graph;
 
 namespace GVDCore.Drivetrain.Component
 {
-  class SimpleEngine : DrivetrainComponent
+  public class SimpleEngine : DrivetrainComponent
   {
     //-------------------------------------------------------------------------
 
@@ -49,7 +49,12 @@ namespace GVDCore.Drivetrain.Component
       double power = ( maxPower * inputProvider.GetAcceleratorInput() );
 
       // Calculate torque and add it to the input torque.
-      inputTorque += power / Crankshaft.GetRps();
+      double crankshaftSpeed = Crankshaft.GetRps();
+
+      if( crankshaftSpeed != 0.0 )
+      {
+        inputTorque += power / crankshaftSpeed;
+      }
 
       // Apply torque to the crankshaft and allow it to update.
       Crankshaft.ApplyTorque( inputTorque );

@@ -1,6 +1,6 @@
 ﻿namespace GVDCore.Drivetrain
 {
-  abstract class DrivetrainComponent
+  public abstract class DrivetrainComponent
   {
     //-------------------------------------------------------------------------
 
