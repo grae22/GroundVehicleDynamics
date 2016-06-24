@@ -1,7 +1,13 @@
-﻿namespace GDVCore.Common.Maths
+﻿using System;
+
+namespace GDVCore.Common.Maths
 {
   static class CommonMaths
   {
+    //-------------------------------------------------------------------------
+
+    public const double TwoPI = ( Math.PI * 2.0 );
+
     //-------------------------------------------------------------------------
 
     public static double Lerp(
@@ -58,6 +64,24 @@
       double normalisedValue = ( fromValue - fromMin ) / fromRange;
 
       return toMin + ( toRange * normalisedValue );
+    }
+
+    //-------------------------------------------------------------------------
+
+    // Convert rads/sec to revs/min.
+
+    public static double ConvertRpsToRpm( double rps )
+    {
+      return ( rps / TwoPI ) * 60.0;
+    }
+
+    //-------------------------------------------------------------------------
+
+    // Convert revs/min to rads/sec.
+
+    public static double ConvertRpmToRps( double rpm )
+    {
+      return ( rpm / 60.0 ) * TwoPI;
     }
 
     //-------------------------------------------------------------------------
