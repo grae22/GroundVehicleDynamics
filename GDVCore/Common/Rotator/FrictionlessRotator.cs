@@ -1,4 +1,5 @@
 ﻿using System;
+using GDVCore.Common.Maths;
 
 namespace GDVCore.Common.Rotator
 {
@@ -65,7 +66,7 @@ namespace GDVCore.Common.Rotator
 
     private void CalculateAngularSpeed()
     {
-      if( Math.Abs( PendingTorque ) > Double.MinValue )
+      if( Math.Abs( PendingTorque ) > double.MinValue )
       {
         // Calc moment of inertia.
         double I = ( Mass * ( Radius * Radius ) ) / 2.0;
@@ -93,7 +94,7 @@ namespace GDVCore.Common.Rotator
 
     private void CalculateRpm()
     {
-      Rpm = GetRps() / ( Math.PI * 2.0 ) * 60.0;
+      Rpm = CommonMaths.ConvertRpsToRpm( GetRps() );
     }
 
     //-------------------------------------------------------------------------
