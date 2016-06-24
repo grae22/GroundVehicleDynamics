@@ -22,7 +22,7 @@ namespace GDVCore.Common.Graph
 
     //-------------------------------------------------------------------------
 
-    private Point[] Points { get; set; } = new Point[ 0 ];
+    protected Point[] Points { get; set; } = new Point[ 0 ];
 
     //-------------------------------------------------------------------------
 
@@ -101,6 +101,13 @@ namespace GDVCore.Common.Graph
 
       // Return the point.
       return Points[ index ];
+    }
+
+    //-------------------------------------------------------------------------
+
+    public int GetPointCount()
+    {
+      return Points.Length;
     }
 
     //-------------------------------------------------------------------------

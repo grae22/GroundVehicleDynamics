@@ -46,6 +46,8 @@ namespace GDVCore_Test.Common.Graph
       Assert.AreEqual( 2.0, TestOb.GetPoint( 0 ).y );
       Assert.AreEqual( 3.0, TestOb.GetPoint( 1 ).x );
       Assert.AreEqual( 4.0, TestOb.GetPoint( 1 ).y );
+
+      Assert.AreEqual( 2, TestOb.GetPointCount() );
     }
 
     //-------------------------------------------------------------------------
@@ -62,6 +64,8 @@ namespace GDVCore_Test.Common.Graph
 
       Assert.AreEqual( 30.0, TestOb.GetPoint( 1 ).x );
       Assert.AreEqual( 40.0, TestOb.GetPoint( 1 ).y );
+
+      Assert.AreEqual( 2, TestOb.GetPointCount() );
     }
 
     //-------------------------------------------------------------------------
