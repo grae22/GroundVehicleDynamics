@@ -16,6 +16,7 @@
     //-------------------------------------------------------------------------
 
     public abstract double ProcessTorqueAndReturnSpeed(
+      double deltaTime,
       double inputTorque,
       DrivetrainInputProvider inputProvider );
 

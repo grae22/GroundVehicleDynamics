@@ -22,6 +22,7 @@ namespace GDVCore_Test
       //-----------------------------------------------------------------------
 
       public override double ProcessTorqueAndReturnSpeed(
+        double deltaTime,
         double inputTorque,
         DrivetrainInputProvider inputProvider )
       {

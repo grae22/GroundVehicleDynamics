@@ -6,45 +6,57 @@ namespace GDVCore.Common.Rotator
   {
     //-------------------------------------------------------------------------
 
-    // Mass (kg).
-    public double Mass { get; set; } = 0.0;
-
-    // Radius (m).
-    public double Radius { get; set; } = 0.0;
-     
     // Rotational speed (rads/sec).
     private double AngularSpeed { get; set; } = 0.0;
 
     // RPM.
     private double Rpm { get; set; } = 0.0;
 
-    // Total force that has been applied and not yet use to recalculate speed.
-    private double PendingForce { get; set; } = 0.0;
+    // Total torque that has been applied and not yet used to recalculate speed.
+    private double PendingTorque { get; set; } = 0.0;
 
     //-------------------------------------------------------------------------
 
-    override public void Update( double deltaTime )
+    public FrictionlessRotator(
+      double mass = 0.0,
+      double radius = 0.0 )
+    :
+      base( mass, radius )
+    {
+
+    }
+
+    //-------------------------------------------------------------------------
+
+    public override void Update( double deltaTime )
     {
       CalculateAngularSpeed();
     }
 
     //-------------------------------------------------------------------------
 
-    override public void ApplyForce( double force )
+    public override void ApplyTorque( double torque )
     {
-      PendingForce += force;
+      PendingTorque += torque;
     }
 
     //-------------------------------------------------------------------------
 
-    override public double GetRpm()
+    public override void ApplyTangentForce( double force )
+    {
+      PendingTorque += ( force * Radius );
+    }
+
+    //-------------------------------------------------------------------------
+
+    public override double GetRpm()
     {
       return Rpm;
     }
 
     //-------------------------------------------------------------------------
 
-    override public double GetRps()
+    public override double GetRps()
     {
       return AngularSpeed;
     }
@@ -53,11 +65,8 @@ namespace GDVCore.Common.Rotator
 
     private void CalculateAngularSpeed()
     {
-      if( Math.Abs( PendingForce ) > Double.MinValue )
+      if( Math.Abs( PendingTorque ) > Double.MinValue )
       {
-        // Calc torque.
-        double T = PendingForce * Radius;
-
         // Calc moment of inertia.
         double I = ( Mass * ( Radius * Radius ) ) / 2.0;
 
@@ -66,14 +75,14 @@ namespace GDVCore.Common.Rotator
 
         if( Mass > 0.0 )
         {
-          a = T / I;
+          a = PendingTorque / I;
         }
 
         // Calc new speed.
         AngularSpeed += a;
 
-        // Reset pending force.
-        PendingForce = 0.0;
+        // Reset pending torque var.
+        PendingTorque = 0.0;
 
         // Recalc RPM.
         CalculateRpm();

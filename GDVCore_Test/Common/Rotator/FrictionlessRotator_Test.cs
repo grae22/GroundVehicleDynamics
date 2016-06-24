@@ -15,9 +15,7 @@ namespace GDVCore_Test.Common.Rotator
     [TestInitialize]
     public void Initialise()
     {
-      TestObject = new FrictionlessRotator();
-      TestObject.Mass = 10.0;
-      TestObject.Radius = 0.1;
+      TestObject = new FrictionlessRotator( 10.0, 0.1 );
     }
 
     //-------------------------------------------------------------------------
@@ -37,7 +35,7 @@ namespace GDVCore_Test.Common.Rotator
       const double F = 1000.0;
 
       // Apply force and let object update.
-      TestObject.ApplyForce( F );
+      TestObject.ApplyTangentForce( F );
       TestObject.Update( 1.0 );
 
       // Calc expected value.
@@ -58,8 +56,8 @@ namespace GDVCore_Test.Common.Rotator
       const double F2 = 100.0;
 
       // Apply force and let object update.
-      TestObject.ApplyForce( F1 );
-      TestObject.ApplyForce( F2 );
+      TestObject.ApplyTangentForce( F1 );
+      TestObject.ApplyTangentForce( F2 );
       TestObject.Update( 1.0 );
 
       // Calc expected value.
@@ -80,9 +78,9 @@ namespace GDVCore_Test.Common.Rotator
       const double F2 = 100.0;
 
       // Apply force and let object update.
-      TestObject.ApplyForce( F1 );
+      TestObject.ApplyTangentForce( F1 );
       TestObject.Update( 1.0 );
-      TestObject.ApplyForce( F2 );
+      TestObject.ApplyTangentForce( F2 );
       TestObject.Update( 1.0 );
 
       // Calc expected value.
@@ -103,8 +101,88 @@ namespace GDVCore_Test.Common.Rotator
       const double F2 = -1000.0;
 
       // Apply force and let object update.
-      TestObject.ApplyForce( F1 );
-      TestObject.ApplyForce( F2 );
+      TestObject.ApplyTangentForce( F1 );
+      TestObject.ApplyTangentForce( F2 );
+      TestObject.Update( 1.0 );
+
+      // Test.
+      Assert.AreEqual( 0.0, TestObject.GetRps() );
+    }
+
+    //-------------------------------------------------------------------------
+
+    [TestMethod]
+    public void SpeedAfterTorque()
+    {
+      const double T = 1000.0;
+
+      // Apply force and let object update.
+      TestObject.ApplyTorque( T );
+      TestObject.Update( 1.0 );
+
+      // Calc expected value.
+      double I = ( TestObject.Mass * ( TestObject.Radius * TestObject.Radius ) ) / 2.0;
+      double a = T / I;
+
+      // Test.
+      Assert.AreEqual( a, TestObject.GetRps() );
+    }
+
+    //-------------------------------------------------------------------------
+
+    [TestMethod]
+    public void SpeedAfterTwoTorques()
+    {
+      const double T1 = 1000.0;
+      const double T2 = 100.0;
+
+      // Apply force and let object update.
+      TestObject.ApplyTorque( T1 );
+      TestObject.ApplyTorque( T2 );
+      TestObject.Update( 1.0 );
+
+      // Calc expected value.
+      double I = ( TestObject.Mass * ( TestObject.Radius * TestObject.Radius ) ) / 2.0;
+      double a = ( T1 + T2 ) / I;
+
+      // Test.
+      Assert.AreEqual( a, TestObject.GetRps() );
+    }
+
+    //-------------------------------------------------------------------------
+
+    [TestMethod]
+    public void SpeedAfterTwoTimeSeparatedTorques()
+    {
+      const double T1 = 1000.0;
+      const double T2 = 100.0;
+
+      // Apply force and let object update.
+      TestObject.ApplyTorque( T1 );
+      TestObject.Update( 1.0 );
+      TestObject.ApplyTorque( T2 );
+      TestObject.Update( 1.0 );
+
+      // Calc expected value.
+      double T = ( T1 + T2 );
+      double I = ( TestObject.Mass * ( TestObject.Radius * TestObject.Radius ) ) / 2.0;
+      double a = T / I;
+
+      // Test.
+      Assert.AreEqual( a, TestObject.GetRps() );
+    }
+
+    //-------------------------------------------------------------------------
+
+    [TestMethod]
+    public void SpeedAfterTwoOpposingTorques()
+    {
+      const double T1 = 1000.0;
+      const double T2 = -1000.0;
+
+      // Apply force and let object update.
+      TestObject.ApplyTorque( T1 );
+      TestObject.ApplyTorque( T2 );
       TestObject.Update( 1.0 );
 
       // Test.
