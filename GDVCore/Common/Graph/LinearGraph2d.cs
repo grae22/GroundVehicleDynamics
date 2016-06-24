@@ -1,4 +1,6 @@
-﻿namespace GDVCore.Common.Graph
+﻿using GDVCore.Common.Maths;
+
+namespace GDVCore.Common.Graph
 {
   class LinearGraph2d : Graph2d
   {
@@ -47,17 +49,11 @@
 
       // Linearly interpolate between range's end points to find a value
       // for the position.
-      double xRange = ( Points[ index + 1 ].x - Points[ index ].x );
-
-      if( xRange == 0.0 )
-      {
-        return Points[ index ].y;
-      }
-
-      double normalisedPosition = ( xPosition - Points[ index ].x ) / xRange;
-      double yRange = ( Points[ index + 1 ].y - Points[ index ].y );
-
-      return Points[ index ].y + ( yRange * normalisedPosition );
+      return
+        CommonMaths.Lerp(
+          xPosition,
+          Points[ index ].x, Points[ index + 1 ].x,
+          Points[ index ].y, Points[ index + 1 ].y );
     }
 
     //-------------------------------------------------------------------------
@@ -105,17 +101,11 @@
 
       // Linearly interpolate between range's end points to find a value
       // for the position.
-      double yRange = ( Points[ index + 1 ].y - Points[ index ].y );
-
-      if( yRange == 0.0 )
-      {
-        return Points[ index ].x;
-      }
-
-      double normalisedPosition = ( yPosition - Points[ index ].y ) / yRange;
-      double xRange = ( Points[ index + 1 ].x - Points[ index ].x );
-
-      return Points[ index ].x + ( xRange * normalisedPosition );
+      return
+        CommonMaths.Lerp(
+          yPosition,
+          Points[ index ].y, Points[ index + 1 ].y,
+          Points[ index ].x, Points[ index + 1 ].x );
     }
 
     //-------------------------------------------------------------------------

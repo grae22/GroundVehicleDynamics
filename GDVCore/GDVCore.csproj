@@ -39,6 +39,7 @@
   <ItemGroup>
     <Compile Include="Common\Graph\Graph2d.cs" />
     <Compile Include="Common\Graph\LinearGraph2d.cs" />
+    <Compile Include="Common\Maths\CommonMaths.cs" />
     <Compile Include="Common\Rotator\FrictionlessRotator.cs" />
     <Compile Include="Common\Rotator\Rotator.cs" />
     <Compile Include="Drivetrain\DrivetrainComponent.cs" />

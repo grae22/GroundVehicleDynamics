@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="Common\Graph\Graph2d_Test.cs" />
     <Compile Include="Common\Graph\LinearGraph2d_Test.cs" />
+    <Compile Include="Common\Maths\CommonMaths_Test.cs" />
     <Compile Include="Common\Rotator\FrictionlessRotator_Test.cs" />
     <Compile Include="Drivetrain\DrivetrainComponentFactory_Test.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

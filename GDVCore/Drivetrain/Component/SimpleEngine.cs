@@ -1,4 +1,5 @@
 ﻿using GDVCore.Common.Rotator;
+using GDVCore.Common.Graph;
 
 namespace GDVCore.Drivetrain.Component
 {
@@ -6,46 +7,27 @@ namespace GDVCore.Drivetrain.Component
   {
     //-------------------------------------------------------------------------
 
-    private Rotator Flywheel { get; set; }
+    // Graph used to look up power values.
+    public Graph2d PowerCurve { get; set; }
 
-    //-------------------------------------------------------------------------
+    // Graph used to look up torque values.
+    public Graph2d TorqueCurve { get; set; }
 
-    public double FlywheelMass
-    {
-      get
-      {
-        return Flywheel.Mass;
-      }
-
-      set
-      {
-        Flywheel.Mass = value;
-      }
-    }
-
-    //-------------------------------------------------------------------------
-
-    public double FlywheelRadius
-    {
-      get
-      {
-        return Flywheel.Radius;
-      }
-
-      set
-      {
-        Flywheel.Radius = value;
-      }
-    }
+    // Rotator object used to model the flywheel.
+    public Rotator Flywheel { get; set; }
 
     //-------------------------------------------------------------------------
 
     public SimpleEngine(
       string name,
+      Graph2d powerCurve = null,
+      Graph2d torqueCurve = null,
       Rotator flywheel = null )
     :
       base( name )
     {
+      PowerCurve = ( powerCurve == null ? new LinearGraph2d() : powerCurve );
+      TorqueCurve = ( torqueCurve == null ? new LinearGraph2d() : torqueCurve );
       Flywheel = ( flywheel == null ? new FrictionlessRotator() : flywheel );
     }
 
@@ -56,6 +38,8 @@ namespace GDVCore.Drivetrain.Component
       double inputTorque,
       DrivetrainInputProvider inputProvider )
     {
+      //Flywheel.ApplyTorque(
+
       Flywheel.Update( deltaTime );
 
       return Flywheel.GetRps();
