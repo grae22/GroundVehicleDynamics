@@ -2,7 +2,6 @@
 using System.Threading;
 using GVDCore.Drivetrain;
 using GVDCore.Drivetrain.Component;
-using System;
 
 namespace GVDTestApp
 {
@@ -35,9 +34,9 @@ namespace GVDTestApp
     {
       InitializeComponent();
 
-      Engine.PowerCurve.AddPoint( 800.0, 1000.0 );
-      Engine.PowerCurve.AddPoint( 1000.0, 2000.0 );
-      Engine.Crankshaft.Mass = 10.0;
+      Engine.PowerCurve.AddPoint( 800.0, 10.0 );
+      Engine.PowerCurve.AddPoint( 1000.0, 20.0 );
+      Engine.Crankshaft.Mass = 20.0;
       Engine.Crankshaft.Radius = 0.10;
 
       Runner = new Thread( new ThreadStart( Run ) );
@@ -53,9 +52,22 @@ namespace GVDTestApp
     {
       IsRunnerAlive = true;
 
+      double scenarioTime = 0.0;
+      double starterMotorTorque = 0.001;
+
       while( IsRunnerAlive )
       {
-        Engine.ProcessTorqueAndReturnSpeed( 0.002, 10.0, Input );
+        Engine.ProcessTorqueAndReturnSpeed(
+          0.002,
+          starterMotorTorque,
+          Input );
+
+        scenarioTime += 0.002;
+
+        if( scenarioTime > 1.0 )
+        {
+          starterMotorTorque = 0.0;
+        }
 
         Thread.Sleep( 2 );
       }
@@ -99,6 +111,8 @@ namespace GVDTestApp
     private void UpdateUi()
     {
       uiEngineRpm.Text = Engine.Crankshaft.GetRpm().ToString();
+
+      Input.AcceleratorInput = uiAccelerator.Value * 0.01;
     }
 
     //-------------------------------------------------------------------------

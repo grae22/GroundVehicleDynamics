@@ -48,16 +48,27 @@ namespace GVDCore.Drivetrain.Component
       // Calculate the actual power by factoring in the accelerator.
       double power = ( maxPower * inputProvider.GetAcceleratorInput() );
 
-      // Calculate torque and add it to the input torque.
+      // Calculate torque.
       double crankshaftSpeed = Crankshaft.GetRps();
+      double torque = 0.0;
 
-      if( crankshaftSpeed != 0.0 )
+      if( crankshaftSpeed > -double.Epsilon &&
+          crankshaftSpeed < 1.0 )
       {
-        inputTorque += power / crankshaftSpeed;
+        torque = inputTorque;
+      }
+      else if( crankshaftSpeed > 1.0 - double.Epsilon &&
+               crankshaftSpeed < 70.0 )
+      {
+        torque = maxPower;
+      }
+      else if( crankshaftSpeed > double.Epsilon )
+      {
+        torque = power / crankshaftSpeed;
       }
 
       // Apply torque to the crankshaft and allow it to update.
-      Crankshaft.ApplyTorque( inputTorque );
+      Crankshaft.ApplyTorque( torque );
       Crankshaft.Update( deltaTime );
 
       return Crankshaft.GetRps();

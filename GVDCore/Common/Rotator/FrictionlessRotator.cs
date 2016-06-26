@@ -66,7 +66,7 @@ namespace GVDCore.Common.Rotator
 
     private void CalculateAngularSpeed()
     {
-      if( Math.Abs( PendingTorque ) > double.MinValue )
+      if( Math.Abs( PendingTorque ) > double.Epsilon )
       {
         // Calc moment of inertia.
         double I = ( Mass * ( Radius * Radius ) ) / 2.0;

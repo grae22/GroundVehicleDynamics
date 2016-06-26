@@ -29,6 +29,8 @@
     private void InitializeComponent()
     {
       this.uiEngineRpm = new System.Windows.Forms.Label();
+      this.uiAccelerator = new System.Windows.Forms.TrackBar();
+      ((System.ComponentModel.ISupportInitialize)(this.uiAccelerator)).BeginInit();
       this.SuspendLayout();
       // 
       // uiEngineRpm
@@ -40,15 +42,27 @@
       this.uiEngineRpm.TabIndex = 0;
       this.uiEngineRpm.Text = "Engine RPM";
       // 
+      // uiAccelerator
+      // 
+      this.uiAccelerator.Location = new System.Drawing.Point(15, 48);
+      this.uiAccelerator.Maximum = 100;
+      this.uiAccelerator.Name = "uiAccelerator";
+      this.uiAccelerator.Size = new System.Drawing.Size(104, 45);
+      this.uiAccelerator.SmallChange = 10;
+      this.uiAccelerator.TabIndex = 10;
+      this.uiAccelerator.TickFrequency = 20;
+      // 
       // MainForm
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.ClientSize = new System.Drawing.Size(612, 468);
+      this.Controls.Add(this.uiAccelerator);
       this.Controls.Add(this.uiEngineRpm);
       this.Name = "MainForm";
       this.Text = "GVD Test App";
       this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
+      ((System.ComponentModel.ISupportInitialize)(this.uiAccelerator)).EndInit();
       this.ResumeLayout(false);
       this.PerformLayout();
 
@@ -57,6 +71,7 @@
     #endregion
 
     private System.Windows.Forms.Label uiEngineRpm;
+    private System.Windows.Forms.TrackBar uiAccelerator;
   }
 }
 
