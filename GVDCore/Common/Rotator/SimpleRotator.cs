@@ -3,9 +3,20 @@ using GVDCore.Common.Maths;
 
 namespace GVDCore.Common.Rotator
 {
-  class FrictionlessRotator : Rotator
+  public class SimpleRotator : Rotator
   {
     //-------------------------------------------------------------------------
+
+    //-------------------------------------------------------------------------
+
+    // Mass (kg).
+    public double Mass { get; set; } = 0.0;
+
+    // Radius (m).
+    public double Radius { get; set; } = 0.0;
+
+    // Coefficient of friction.
+    public double CoefficientOfFriction { get; set; } = 0.0;
 
     // Rotational speed (rads/sec).
     private double AngularSpeed { get; set; } = 0.0;
@@ -18,13 +29,14 @@ namespace GVDCore.Common.Rotator
 
     //-------------------------------------------------------------------------
 
-    public FrictionlessRotator(
+    public SimpleRotator(
       double mass = 0.0,
-      double radius = 0.0 )
-    :
-      base( mass, radius )
+      double radius = 0.0,
+      double coefficientOfFriction = 0.0 )
     {
-
+      Mass = mass;
+      Radius = radius;
+      CoefficientOfFriction = coefficientOfFriction;
     }
 
     //-------------------------------------------------------------------------
@@ -79,22 +91,18 @@ namespace GVDCore.Common.Rotator
           a = PendingTorque / I;
         }
 
-        // Calc new speed.
-        AngularSpeed += a;
-
         // Reset pending torque var.
         PendingTorque = 0.0;
 
-        // Recalc RPM.
-        CalculateRpm();
+        // Calc new speed.
+        AngularSpeed += a;
       }
-    }
 
-    //-------------------------------------------------------------------------
+      // Apply friction.
+      AngularSpeed += -( AngularSpeed * CoefficientOfFriction );
 
-    private void CalculateRpm()
-    {
-      Rpm = CommonMaths.ConvertRpsToRpm( GetRps() );
+      // Recalc RPM.
+      Rpm = CommonMaths.ConvertRpsToRpm( AngularSpeed );
     }
 
     //-------------------------------------------------------------------------

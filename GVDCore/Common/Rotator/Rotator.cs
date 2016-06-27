@@ -3,24 +3,6 @@
   public abstract class Rotator
   {
     //-------------------------------------------------------------------------
-
-    // Mass (kg).
-    public double Mass { get; set; } = 0.0;
-
-    // Radius (m).
-    public double Radius { get; set; } = 0.0;
-
-    //-------------------------------------------------------------------------
-
-    public Rotator(
-      double mass,
-      double radius )
-    {
-      Mass = mass;
-      Radius = radius;
-    }
-
-    //-------------------------------------------------------------------------
     // Abstract methods.
 
     // Called to update object's state.

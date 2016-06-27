@@ -4,18 +4,18 @@ using GVDCore.Common.Rotator;
 namespace GVDCore_Test.Common.Rotator
 {
   [TestClass]
-  public class FrictionlessRotator_Test
+  public class SimpleRotator_Test
   {
     //-------------------------------------------------------------------------
 
-    private FrictionlessRotator TestObject;
+    private SimpleRotator TestObject;
 
     //-------------------------------------------------------------------------
 
     [TestInitialize]
     public void Initialise()
     {
-      TestObject = new FrictionlessRotator( 10.0, 0.1 );
+      TestObject = new SimpleRotator( 10.0, 0.1 );
     }
 
     //-------------------------------------------------------------------------

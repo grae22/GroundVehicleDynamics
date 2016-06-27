@@ -1,11 +1,15 @@
 ﻿using GVDCore.Common.Rotator;
 using GVDCore.Common.Graph;
+using GVDCore.Common.Maths;
 
 namespace GVDCore.Drivetrain.Component
 {
   public class SimpleEngine : DrivetrainComponent
   {
     //-------------------------------------------------------------------------
+
+    // Idle speed (rps).
+    private double IdleSpeed { get; set; } = 0.0;
 
     // Graph used to look up power values.
     public Graph2d PowerCurve { get; set; }
@@ -19,8 +23,24 @@ namespace GVDCore.Drivetrain.Component
 
     //-------------------------------------------------------------------------
 
+    public double IdleRpm
+    {
+      get
+      {
+        return CommonMaths.ConvertRpsToRpm( IdleSpeed );
+      }
+      
+      set
+      {
+        IdleSpeed = CommonMaths.ConvertRpmToRps( value );
+      }
+    }
+
+    //-------------------------------------------------------------------------
+
     public SimpleEngine(
       string name,
+      double idleRpm = 0.0,
       Graph2d powerCurve = null,
       Graph2d torqueCurve = null,
       Rotator crankshaft = null )
@@ -29,7 +49,7 @@ namespace GVDCore.Drivetrain.Component
     {
       PowerCurve = ( powerCurve == null ? new LinearGraph2d() : powerCurve );
       TorqueCurve = ( torqueCurve == null ? new LinearGraph2d() : torqueCurve );
-      Crankshaft = ( crankshaft == null ? new FrictionlessRotator() : crankshaft );
+      Crankshaft = ( crankshaft == null ? new SimpleRotator() : crankshaft );
     }
 
     //-------------------------------------------------------------------------
@@ -44,6 +64,11 @@ namespace GVDCore.Drivetrain.Component
       // Figure out using our current engine speed what the max power we
       // can generate is.
       double maxPower = PowerCurve.GetValueAtX( Crankshaft.GetRpm() );
+
+      // Figure out the power at idle.
+      double idlePower =
+        PowerCurve.GetValueAtX(
+          CommonMaths.ConvertRpsToRpm( IdleSpeed ) );
       
       // Calculate the actual power by factoring in the accelerator.
       double power = ( maxPower * inputProvider.GetAcceleratorInput() );
@@ -52,19 +77,13 @@ namespace GVDCore.Drivetrain.Component
       double crankshaftSpeed = Crankshaft.GetRps();
       double torque = 0.0;
 
-      if( crankshaftSpeed > -double.Epsilon &&
-          crankshaftSpeed < 1.0 )
+      if( crankshaftSpeed < double.Epsilon )
       {
         torque = inputTorque;
       }
-      else if( crankshaftSpeed > 1.0 - double.Epsilon &&
-               crankshaftSpeed < 70.0 )
+      else
       {
-        torque = maxPower;
-      }
-      else if( crankshaftSpeed > double.Epsilon )
-      {
-        torque = power / crankshaftSpeed;
+        torque = ( idlePower + power ) / crankshaftSpeed;
       }
 
       // Apply torque to the crankshaft and allow it to update.
