@@ -14,9 +14,6 @@ namespace GVDCore.Drivetrain.Component
     // Graph used to look up power values.
     public Graph2d PowerCurve { get; set; }
 
-    // Graph used to look up torque values.
-    public Graph2d TorqueCurve { get; set; }
-
     // Rotator object used to model the crankshaft, when assigning a mass
     // one should probably include the mass of the flywheel.
     public Rotator Crankshaft { get; set; }
@@ -48,7 +45,6 @@ namespace GVDCore.Drivetrain.Component
       base( name )
     {
       PowerCurve = ( powerCurve == null ? new LinearGraph2d() : powerCurve );
-      TorqueCurve = ( torqueCurve == null ? new LinearGraph2d() : torqueCurve );
       Crankshaft = ( crankshaft == null ? new SimpleRotator() : crankshaft );
     }
 
