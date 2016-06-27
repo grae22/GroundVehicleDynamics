@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace GVDCore.Drivetrain
 {
@@ -10,7 +11,7 @@ namespace GVDCore.Drivetrain
     {
       public DrivetrainComponent Component { get; set; } = null;
       public ComponentNode PreviousComponent { get; set; } = null;
-      public ComponentNode[] NextComponents { get; set; } = null;
+      public List<ComponentNode> NextComponents { get; set; } = new List<ComponentNode>();
 
       public void AddNextNode( DrivetrainComponent component )
       {
@@ -18,22 +19,17 @@ namespace GVDCore.Drivetrain
         newNode.Component = component;
         newNode.PreviousComponent = this;
 
-        if( NextComponents == null )
-        {
-          NextComponents = new ComponentNode[ 1 ];
-        }
-        else
-        {
-          NextComponents = new ComponentNode[ NextComponents.Length + 1 ];
-        }
-
-        NextComponents[ NextComponents.Length - 1 ] = newNode;
+        NextComponents.Add( newNode );
       }
     }
 
     //-------------------------------------------------------------------------
 
-    private ComponentNode FirstNode { get; set; } = null;
+    // 'First' nodes are at the 'head' of the drivetrain and will usually
+    // have a chain of nodes following them.
+    // Note: There may be multiple 'first' nodes, e.g. a drivetrain may have
+    //       multiple engines.
+    private List< ComponentNode > FirstNodes { get; set; } = new List<ComponentNode>();
 
     //-------------------------------------------------------------------------
 
@@ -52,13 +48,6 @@ namespace GVDCore.Drivetrain
         throw new Exception( "Component name cannot be null or zero length." );
       }
 
-      // 'After' component is null and there is already a 'first' component?
-      if( afterComponentName == null &&
-          FirstNode != null )
-      {
-        throw new Exception( "A 'first' component already exists." );
-      }
-
       // Create the new component.
       DrivetrainComponent component =
         DrivetrainComponentFactory.CreateComponent< T >( componentName );
@@ -66,15 +55,14 @@ namespace GVDCore.Drivetrain
       // Adding as the 'first' component?
       if( afterComponentName == null )
       {
-        FirstNode = new ComponentNode();
-        FirstNode.Component = component;
+        ComponentNode node = new ComponentNode();
+        node.Component = component;
+
+        FirstNodes.Add( node );
       }
       else  // Find the component we need to add the new one after.
       {
-        ComponentNode afterNode =
-          FindComponentNodeRecursive(
-            FirstNode,
-            afterComponentName );
+        ComponentNode afterNode = FindComponentNode( afterComponentName );
 
         if( afterNode == null )
         {
@@ -83,6 +71,26 @@ namespace GVDCore.Drivetrain
 
         afterNode.AddNextNode( component );
       }
+    }
+
+    //-------------------------------------------------------------------------
+
+    private ComponentNode FindComponentNode( string componentName )
+    {
+      foreach( ComponentNode node in FirstNodes )
+      {
+        ComponentNode foundNode =
+          FindComponentNodeRecursive(
+            node,
+            componentName );
+
+        if( foundNode != null )
+        {
+          return foundNode;
+        }
+      }
+
+      return null;
     }
 
     //-------------------------------------------------------------------------

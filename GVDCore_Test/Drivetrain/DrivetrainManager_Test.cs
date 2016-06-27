@@ -32,6 +32,18 @@ namespace GVDCore_Test.Drivetrain
     //-------------------------------------------------------------------------
 
     [TestMethod]
+    public void AddComponentsDualEngine()
+    {
+      TestOb.AddComponent<SimpleEngine>( null, "Engine1" );
+      TestOb.AddComponent<SimpleEngine>( null, "Engine2" );
+
+      TestOb.AddComponent<SimpleEngine>( "Engine1", "Engine1_1" );
+      TestOb.AddComponent<SimpleEngine>( "Engine2", "Engine2_1" );
+    }
+
+    //-------------------------------------------------------------------------
+
+    [TestMethod]
     [ExpectedException( typeof( Exception ) ) ]
     public void AddComponentAfterInvalidComponent()
     {
