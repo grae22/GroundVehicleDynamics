@@ -12,11 +12,11 @@ namespace GVDCore.Drivetrain.Component
     private double IdleSpeed { get; set; } = 0.0;
 
     // Graph used to look up power values.
-    public Graph2d PowerCurve { get; set; }
+    public Graph2d PowerCurve { get; set; } = null;
 
     // Rotator object used to model the crankshaft, when assigning a mass
     // one should probably include the mass of the flywheel.
-    public Rotator Crankshaft { get; set; }
+    public Rotator Crankshaft { get; set; } = null;
 
     //-------------------------------------------------------------------------
 
@@ -31,6 +31,20 @@ namespace GVDCore.Drivetrain.Component
       {
         IdleSpeed = CommonMaths.ConvertRpmToRps( value );
       }
+    }
+
+    //-------------------------------------------------------------------------
+
+    public SimpleEngine( string name )
+    :
+      this(
+        name,
+        0.0,
+        null,
+        null,
+        null )
+    {
+
     }
 
     //-------------------------------------------------------------------------

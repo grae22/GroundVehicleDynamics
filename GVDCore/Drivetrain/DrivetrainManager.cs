@@ -20,7 +20,7 @@ namespace GVDCore.Drivetrain
 
         if( NextComponents == null )
         {
-          NextComponents = new ComponentNode[ 0 ];
+          NextComponents = new ComponentNode[ 1 ];
         }
         else
         {
@@ -91,6 +91,12 @@ namespace GVDCore.Drivetrain
       ComponentNode nodeToCheck,
       string componentNameToFind )
     {
+      // Node to check is null?
+      if( nodeToCheck == null )
+      {
+        return null;
+      }
+
       // Is it this node?
       if( nodeToCheck.Component.Name == componentNameToFind )
       {

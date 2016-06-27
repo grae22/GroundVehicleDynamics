@@ -57,6 +57,7 @@
     <Compile Include="Common\Maths\CommonMaths_Test.cs" />
     <Compile Include="Common\Rotator\SimpleRotator_Test.cs" />
     <Compile Include="Drivetrain\DrivetrainComponentFactory_Test.cs" />
+    <Compile Include="Drivetrain\DrivetrainManager_Test.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
