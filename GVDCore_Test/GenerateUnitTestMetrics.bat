@@ -32,7 +32,7 @@ exit /b %errorlevel%
 -register:user ^
 -target:"%~dp0..\packages\NUnit.ConsoleRunner.3.6.1\tools\nunit3-console.exe" ^
 -targetargs:"\"%~dp0..\GVDCore_Test\bin\Debug\GVDCore_Test.dll\"" ^
--filter:"+[*]*" ^
+-filter:"+[*]* -[GVDCore_Test]*" ^
 -mergebyhash ^
 -skipautoprops ^
 -output:"%~dp0\GeneratedReports\UnitTestMetrics.xml"
