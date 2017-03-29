@@ -1,10 +1,11 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using GVDCore.Common.Graph;
 
 namespace GVDCore_Test.Common.Graph
 {
-  [TestClass]
+  [TestFixture]
+  [Category( "Graph2d" )]
   public class Graph2d_Test
   {
     //-------------------------------------------------------------------------
@@ -28,7 +29,7 @@ namespace GVDCore_Test.Common.Graph
 
     //-------------------------------------------------------------------------
 
-    [TestInitialize]
+    [SetUp]
     public void Intialise()
     {
       TestOb = new MockGraph2d();
@@ -36,7 +37,7 @@ namespace GVDCore_Test.Common.Graph
 
     //-------------------------------------------------------------------------
 
-    [TestMethod]
+    [Test]
     public void AddPoints()
     {
       TestOb.AddPoint( 1.0, 2.0 );
@@ -52,7 +53,7 @@ namespace GVDCore_Test.Common.Graph
 
     //-------------------------------------------------------------------------
 
-    [TestMethod]
+    [Test]
     public void SetPoints()
     {
       // Add some points.
@@ -84,7 +85,7 @@ namespace GVDCore_Test.Common.Graph
 
     //-------------------------------------------------------------------------
 
-    [TestMethod]
+    [Test]
     public void SetPointOutOfBounds()
     {
       bool caughtException = false;
@@ -150,7 +151,7 @@ namespace GVDCore_Test.Common.Graph
 
     //-------------------------------------------------------------------------
 
-    [TestMethod]
+    [Test]
     public void GetPointOutOfBounds()
     {
       bool caughtException = false;
@@ -216,7 +217,7 @@ namespace GVDCore_Test.Common.Graph
 
     //-------------------------------------------------------------------------
 
-    [TestMethod]
+    [Test]
     public void MinAndMaxBounds()
     {
       // Add some points.

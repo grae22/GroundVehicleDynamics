@@ -1,11 +1,12 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using GVDCore.Drivetrain;
 using GVDCore.Drivetrain.Component;
 
 namespace GVDCore_Test.Drivetrain
 {
-  [TestClass]
+  [TestFixture]
+  [Category( "DrivetrainManager" )]
   public class DrivetrainManager_Test
   {
     //-------------------------------------------------------------------------
@@ -14,7 +15,7 @@ namespace GVDCore_Test.Drivetrain
 
     //-------------------------------------------------------------------------
 
-    [TestInitialize]
+    [SetUp]
     public void Initialise()
     {
       TestOb = new DrivetrainManager();
@@ -22,7 +23,7 @@ namespace GVDCore_Test.Drivetrain
 
     //-------------------------------------------------------------------------
 
-    [TestMethod]
+    [Test]
     public void AddComponents()
     {
       TestOb.AddComponent<SimpleEngine>( null, "Engine" );
@@ -31,7 +32,7 @@ namespace GVDCore_Test.Drivetrain
 
     //-------------------------------------------------------------------------
 
-    [TestMethod]
+    [Test]
     public void AddComponentsDualEngine()
     {
       TestOb.AddComponent<SimpleEngine>( null, "Engine1" );
@@ -43,11 +44,19 @@ namespace GVDCore_Test.Drivetrain
 
     //-------------------------------------------------------------------------
 
-    [TestMethod]
-    [ExpectedException( typeof( Exception ) ) ]
+    [Test]
     public void AddComponentAfterInvalidComponent()
     {
-      TestOb.AddComponent<SimpleEngine>( "ComponentThatDoesntExist", "Engine" );
+      try
+      {
+        TestOb.AddComponent<SimpleEngine>( "ComponentThatDoesntExist", "Engine" );
+      }
+      catch( Exception )
+      {
+        Assert.Pass();
+      }
+
+      Assert.Fail();
     }
 
     //-------------------------------------------------------------------------

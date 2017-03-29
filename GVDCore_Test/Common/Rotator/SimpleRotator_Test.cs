@@ -1,9 +1,10 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using GVDCore.Common.Rotator;
 
 namespace GVDCore_Test.Common.Rotator
 {
-  [TestClass]
+  [TestFixture]
+  [Category( "SimpleRotator" )]
   public class SimpleRotator_Test
   {
     //-------------------------------------------------------------------------
@@ -12,7 +13,7 @@ namespace GVDCore_Test.Common.Rotator
 
     //-------------------------------------------------------------------------
 
-    [TestInitialize]
+    [SetUp]
     public void Initialise()
     {
       TestObject = new SimpleRotator( 10.0, 0.1 );
@@ -20,7 +21,7 @@ namespace GVDCore_Test.Common.Rotator
 
     //-------------------------------------------------------------------------
 
-    [TestMethod]
+    [Test]
     public void SpeedInitiallyZero()
     {
       Assert.AreEqual( 0.0, TestObject.GetRps() );
@@ -29,7 +30,7 @@ namespace GVDCore_Test.Common.Rotator
 
     //-------------------------------------------------------------------------
 
-    [TestMethod]
+    [Test]
     public void SpeedAfterForce()
     {
       const double F = 1000.0;
@@ -49,7 +50,7 @@ namespace GVDCore_Test.Common.Rotator
 
     //-------------------------------------------------------------------------
 
-    [TestMethod]
+    [Test]
     public void SpeedAfterTwoForces()
     {
       const double F1 = 1000.0;
@@ -71,7 +72,7 @@ namespace GVDCore_Test.Common.Rotator
 
     //-------------------------------------------------------------------------
 
-    [TestMethod]
+    [Test]
     public void SpeedAfterTwoTimeSeparatedForces()
     {
       const double F1 = 1000.0;
@@ -94,7 +95,7 @@ namespace GVDCore_Test.Common.Rotator
 
     //-------------------------------------------------------------------------
 
-    [TestMethod]
+    [Test]
     public void SpeedAfterTwoOpposingForces()
     {
       const double F1 = 1000.0;
@@ -111,7 +112,7 @@ namespace GVDCore_Test.Common.Rotator
 
     //-------------------------------------------------------------------------
 
-    [TestMethod]
+    [Test]
     public void SpeedAfterTorque()
     {
       const double T = 1000.0;
@@ -130,7 +131,7 @@ namespace GVDCore_Test.Common.Rotator
 
     //-------------------------------------------------------------------------
 
-    [TestMethod]
+    [Test]
     public void SpeedAfterTwoTorques()
     {
       const double T1 = 1000.0;
@@ -151,7 +152,7 @@ namespace GVDCore_Test.Common.Rotator
 
     //-------------------------------------------------------------------------
 
-    [TestMethod]
+    [Test]
     public void SpeedAfterTwoTimeSeparatedTorques()
     {
       const double T1 = 1000.0;
@@ -174,7 +175,7 @@ namespace GVDCore_Test.Common.Rotator
 
     //-------------------------------------------------------------------------
 
-    [TestMethod]
+    [Test]
     public void SpeedAfterTwoOpposingTorques()
     {
       const double T1 = 1000.0;

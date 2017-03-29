@@ -1,9 +1,10 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using GVDCore.Common.Graph;
 
 namespace GVDCore_Test.Common.Graph
 {
-  [TestClass]
+  [TestFixture]
+  [Category( "LinearGraph2d" )]
   public class LinearGraph2d_Test
   {
     //-------------------------------------------------------------------------
@@ -12,7 +13,7 @@ namespace GVDCore_Test.Common.Graph
 
     //-------------------------------------------------------------------------
 
-    [TestInitialize]
+    [SetUp]
     public void Initialise()
     {
       TestOb = new LinearGraph2d();
@@ -20,7 +21,7 @@ namespace GVDCore_Test.Common.Graph
 
     //-------------------------------------------------------------------------
 
-    [TestMethod]
+    [Test]
     public void NoGraphPointsX()
     {
       Assert.AreEqual( 0.0, TestOb.GetValueAtX( 123.4 ) );
@@ -28,7 +29,7 @@ namespace GVDCore_Test.Common.Graph
 
     //-------------------------------------------------------------------------
 
-    [TestMethod]
+    [Test]
     public void OneGraphPointX()
     {
       TestOb.AddPoint( 10.0, 500.0 );
@@ -38,7 +39,7 @@ namespace GVDCore_Test.Common.Graph
 
     //-------------------------------------------------------------------------
 
-    [TestMethod]
+    [Test]
     public void ValuesWithinGraphPointsX()
     {
       // Add some points to the graph.
@@ -58,7 +59,7 @@ namespace GVDCore_Test.Common.Graph
 
     //-------------------------------------------------------------------------
 
-    [TestMethod]
+    [Test]
     public void ValuesOutsideGraphPointsX()
     {
       // Add some points to the graph.
@@ -72,7 +73,7 @@ namespace GVDCore_Test.Common.Graph
 
     //-------------------------------------------------------------------------
 
-    [TestMethod]
+    [Test]
     public void NoGraphPointsY()
     {
       Assert.AreEqual( 0.0, TestOb.GetValueAtY( 123.4 ) );
@@ -80,7 +81,7 @@ namespace GVDCore_Test.Common.Graph
 
     //-------------------------------------------------------------------------
 
-    [TestMethod]
+    [Test]
     public void OneGraphPointY()
     {
       TestOb.AddPoint( 500.0, 10.0 );
@@ -90,7 +91,7 @@ namespace GVDCore_Test.Common.Graph
 
     //-------------------------------------------------------------------------
 
-    [TestMethod]
+    [Test]
     public void ValuesWithinGraphPointsY()
     {
       // Add some points to the graph.
@@ -110,7 +111,7 @@ namespace GVDCore_Test.Common.Graph
 
     //-------------------------------------------------------------------------
 
-    [TestMethod]
+    [Test]
     public void ValuesOutsideGraphPointsY()
     {
       // Add some points to the graph.

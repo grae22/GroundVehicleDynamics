@@ -1,14 +1,15 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using GVDCore.Common.Maths;
 
 namespace GVDCore_Test.Common.Maths
 {
-  [TestClass]
+  [TestFixture]
+  [Category( "CommonMaths" )]
   public class CommonMaths_Test
   {
     //-------------------------------------------------------------------------
 
-    [TestMethod]
+    [Test]
     public void Lerp()
     {
       Assert.AreEqual(
@@ -36,7 +37,7 @@ namespace GVDCore_Test.Common.Maths
 
     //-------------------------------------------------------------------------
 
-    [TestMethod]
+    [Test]
     public void RangeLerp()
     {
       Assert.AreEqual(

@@ -1,9 +1,10 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using GVDCore.Drivetrain;
 
 namespace GVDCore_Test
 {
-  [TestClass]
+  [TestFixture]
+  [Category( "DrivetrainComponentFactory" )]
   public class DrivetrainComponentFactory_Test
   {
     //=========================================================================
@@ -34,7 +35,7 @@ namespace GVDCore_Test
 
     //=========================================================================
 
-    [TestMethod]
+    [Test]
     public void InstantiateObject()
     {
       DrivetrainComponent component =
